@@ -1,11 +1,21 @@
 package svarog.preorders
 
+import svarog.Equivalence
+
 /**
  * Preorder is a (X, ≤) set X equipped with binary relation ≤
  * that is reflexive and transitive.
  */
-trait Preorder[X] {
+trait Preorder[X] extends Equivalence[X] { self =>
   def le(a: X, b: X): Boolean
+
+  // x and y are equivalent if y ≤ x and x ≤ y
+  override def eqivalent(a: X, b: X): Boolean = le(a,b) && le(b,a)
+
+  // Product preorder
+  def product[Y](q: Preorder[Y]): Preorder[(X,Y)] = new Preorder[(X, Y)] {
+    override def le(a: (X,Y), b: (X,Y)): Boolean = self.le(a._1, b._1) && q.le(a._2, b._2)
+  }
 }
 
 /**

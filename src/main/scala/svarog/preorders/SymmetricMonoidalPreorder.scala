@@ -22,35 +22,18 @@ trait SymmetricMonoidalPreorderLaws extends MonoidalPreorderLaws {
 
 object SymmetricMonoidalPreorderLaws extends SymmetricMonoidalPreorderLaws
 
-// TODO check
-object SMPIntPlusLe extends SymmetricMonoidalPreorder[Int] {
-  override val I: Int = 0
-  override def multiply(a: Int, b: Int): Int = a + b // TODO overflow will break laws?
-  override def le(a: Int, b: Int): Boolean = a <= b
-}
+object SymmetricMonoidalPreorder {
 
-object SMPIntMultiLe extends SymmetricMonoidalPreorder[Int] {
-  override val I: Int = 1
-  override def multiply(a: Int, b: Int): Int = a * b // TODO overflow will break laws?
-  override def le(a: Int, b: Int): Boolean = a <= b
-}
+  def newSMP[X](lessThan: (X,X) => Boolean, m: (X,X) => X, e: X): SymmetricMonoidalPreorder[X] =
+    new SymmetricMonoidalPreorder[X] {
+      override def I: X = e
+      override def multiply(a: X, b: X): X = m(a,b)
+      override def le(a: X, b: X): Boolean = lessThan(a,b)
+    }
 
-object SMPBoolAndLe extends SymmetricMonoidalPreorder[Boolean] {
-  override val I: Boolean = true
-  override def multiply(a: Boolean, b: Boolean): Boolean = a && b
-  override def le(a: Boolean, b: Boolean): Boolean = a <= b
-}
+  val SMPBigIntPlusLe: SymmetricMonoidalPreorder[BigInt] = newSMP[BigInt](_ <= _, _ + _, BigInt(0))
+  val SMPBigIntMultiGe: SymmetricMonoidalPreorder[BigInt] = newSMP[BigInt](_ >= _, _ * _, BigInt(1))
 
-object SMPBoolOrLe extends SymmetricMonoidalPreorder[Boolean] {
-  override val I: Boolean = false
-  override def multiply(a: Boolean, b: Boolean): Boolean = a || b
-  override def le(a: Boolean, b: Boolean): Boolean = a <= b
+  val SMPBoolAndLe: SymmetricMonoidalPreorder[Boolean] = newSMP[Boolean](_ <= _, _ && _, true)
+  val SMPBoolOrLe: SymmetricMonoidalPreorder[Boolean] = newSMP[Boolean](_ <= _, _ || _, false)
 }
-
-object SMPIntOrLe extends SymmetricMonoidalPreorder[Int] {
-  override val I: Int = Int.MaxValue
-  override def multiply(a: Int, b: Int): Int = Math.min(a,b)
-  override def le(a: Int, b: Int): Boolean = a <= b
-}
-
-// TODO

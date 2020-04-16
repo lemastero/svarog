@@ -35,3 +35,5 @@ trait PreorderLaws {
     if(P.le(a,b) && P.le(b,c)) P.le(a,c)
     else true
 }
+
+object PreorderLaws extends PreorderLaws

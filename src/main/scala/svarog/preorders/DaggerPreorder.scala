@@ -11,7 +11,7 @@ trait DaggerPreorder[P]
     with Equivalence[P] {
 
   // dagger preorder is equivalence relation
-  override def eqivalent(a: P, b: P): Boolean = le(a,b)
+  override def equivalent(a: P, b: P): Boolean = le(a,b)
 }
 
 /**
@@ -19,10 +19,11 @@ trait DaggerPreorder[P]
  * - forall p, q ∈ P we have q ≤ p whenever p ≤ q
  */
 trait DaggerPreorderLaws extends PreorderLaws {
+  import svarog.preorders.Preorder.ops._
 
-  /** forall a,b,c ∈ X if a ≤ b and b ≤ c then a ≤ c */
+  /** forall a,b ∈ X if a ≤ b then b ≤ a */
   def symmetry[X](a: X, b: X)(implicit P: Preorder[X]): Boolean =
-    if(P.le(a,b)) P.le(b,a)
-    else if(P.le(b,a)) P.le(a,b)
-    else false
+    if(a <= b) b <= a
+    else if(b <= a) a <= b
+    else true
 }

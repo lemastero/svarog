@@ -20,11 +20,11 @@ trait MonoidalPreorder[X] extends Preorder[X] with Monoid[X]
  * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c􏰆 = a ⊗ (b ⊗ c)
  */
 trait MonoidalPreorderLaws extends PreorderLaws with MonoidLaws {
+  import svarog.preorders.Preorder.ops._
+  import svarog.monoid.Monoid.ops._
 
   /** forall a1, a2, b1, b2 ∈ X, if a1 ≤ b1 and a2 ≤ b2, then a1 ⊗ a2 ≤ b1 ⊗ b2 */
-  def monotonicity[X](a1: X, a2: X, b1: X, b2: X)(implicit P: MonoidalPreorder[X]): Boolean = {
-    import P._
-    if(le(a1,b1) && le(a2,b2)) le(multiply(a1,a2), multiply(b1,b2))
-    else false
-  }
+  def monotonicity[X](a1: X, a2: X, b1: X, b2: X)(implicit P: MonoidalPreorder[X]): Boolean =
+    if( (a1 <= b1) && (a2 <= b2) ) (a1 * a2) <= (b1 * b2)
+    else true
 }

@@ -1,11 +1,15 @@
 package svarog.preorders
 
+import simulacrum.typeclass
+
 /**
  * Preorder with symmetric monoidal structure is a preorder (X, ≤, ⊗, I) with monoidal structure
  * where monoidal multiplication is symmetric:
  * - symmetry: forall a,b ∈ X, a ⊗ b􏰆 = b ⊗ a
  */
-trait SymmetricMonoidalPreorder[X] extends MonoidalPreorder[X]
+@typeclass
+trait SymmetricMonoidalPreorder[X]
+  extends MonoidalPreorder[X]
 
 /**
  * Laws for SymmetricMonoidalPreorder:
@@ -31,9 +35,15 @@ object SymmetricMonoidalPreorder {
       override def le(a: X, b: X): Boolean = lessThan(a,b)
     }
 
-  val SMPBigIntPlusLe: SymmetricMonoidalPreorder[BigInt] = newSMP[BigInt](_ <= _, _ + _, BigInt(0))
-  val SMPBigIntMultiGe: SymmetricMonoidalPreorder[BigInt] = newSMP[BigInt](_ >= _, _ * _, BigInt(1))
+  val SMPBigIntPlusLePlus: SymmetricMonoidalPreorder[BigInt] =
+    newSMP[BigInt](_ <= _, _ + _, BigInt(0))
+  val SMPBigIntMultiGeTimes: SymmetricMonoidalPreorder[BigInt] =
+    newSMP[BigInt](_ >= _, _ * _, BigInt(1))
+  val SMPBigIntMultiGePlus: SymmetricMonoidalPreorder[BigInt] =
+    newSMP[BigInt](_ >= _, _ + _, BigInt(0))
 
-  val SMPBoolAndLe: SymmetricMonoidalPreorder[Boolean] = newSMP[Boolean](_ <= _, _ && _, true)
-  val SMPBoolOrLe: SymmetricMonoidalPreorder[Boolean] = newSMP[Boolean](_ <= _, _ || _, false)
+  val SMPBoolAndLe: SymmetricMonoidalPreorder[Boolean] =
+    newSMP[Boolean](_ <= _, _ && _, true)
+  val SMPBoolOrLe: SymmetricMonoidalPreorder[Boolean] =
+    newSMP[Boolean](_ <= _, _ || _, false)
 }

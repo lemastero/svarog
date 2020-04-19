@@ -1,6 +1,7 @@
 package svarog.preorders
 
-import svarog.monoid.{Monoid, MonoidLaws}
+import simulacrum.typeclass
+import svarog.algebra.{Monoid, MonoidLaws}
 
 /**
  * Preorder with monoidal structure is a preorder (X, ≤) equipped with:
@@ -11,6 +12,7 @@ import svarog.monoid.{Monoid, MonoidLaws}
  * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
  * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c)
  */
+@typeclass
 trait MonoidalPreorder[X] extends Preorder[X] with Monoid[X]
 
 /**
@@ -21,7 +23,7 @@ trait MonoidalPreorder[X] extends Preorder[X] with Monoid[X]
  */
 trait MonoidalPreorderLaws extends PreorderLaws with MonoidLaws {
   import svarog.preorders.Preorder.ops._
-  import svarog.monoid.Monoid.ops._
+  import svarog.algebra.Monoid.ops._
 
   /** forall a1, a2, b1, b2 ∈ X, if a1 ≤ b1 and a2 ≤ b2, then a1 ⊗ a2 ≤ b1 ⊗ b2 */
   def monotonicity[X](a1: X, a2: X, b1: X, b2: X)(implicit P: MonoidalPreorder[X]): Boolean =

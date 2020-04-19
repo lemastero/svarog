@@ -6,9 +6,9 @@ trait OplaxMonoidalMonotone[P,Q] extends Function1[P,Q]
 
 trait OplaxMonoidalMonotoneLaws {
   import svarog.preorders.Preorder.ops._
-  import svarog.monoid.Monoid.ops._
+  import svarog.algebra.Monoid.ops._
 
-  def lawA[P,Q](implicit p: MonoidalPreorder[P], q: MonoidalPreorder[Q], f: MonoidalMonotone[P,Q]): Boolean =
+  def lawA[P,Q](implicit p: MonoidalPreorder[P], q: MonoidalPreorder[Q], f: MonoidalMonotoneNaive[P,Q]): Boolean =
     f(p.I) <= q.I
 
   def lawB[P,Q](
@@ -16,7 +16,7 @@ trait OplaxMonoidalMonotoneLaws {
         p2: P)(implicit
         p: MonoidalPreorder[P],
         q: MonoidalPreorder[Q],
-        f: MonoidalMonotone[P,Q]): Boolean = {
+        f: MonoidalMonotoneNaive[P,Q]): Boolean = {
     f(p1 * p2) <= (f(p1) * f(p2))
   }
 }

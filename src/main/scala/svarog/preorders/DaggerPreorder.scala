@@ -1,14 +1,12 @@
 package svarog.preorders
 
-import svarog.Equivalence
 
 /**
  * Dagger preorder is a (X, ≤) is preorder where
  * forall p, q ∈ P we have q ≤ p whenever p ≤ q
  */
 trait DaggerPreorder[P]
-    extends Preorder[P]
-    with Equivalence[P] {
+    extends Preorder[P] {
 
   // dagger preorder is equivalence relation
   override def equivalent(a: P, b: P): Boolean = le(a,b)

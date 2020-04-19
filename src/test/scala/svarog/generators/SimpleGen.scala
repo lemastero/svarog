@@ -2,9 +2,12 @@ package svarog.generators
 
 import java.math.BigInteger
 
-import hedgehog.Gen._
-import hedgehog._
-import hedgehog.core._
+import hedgehog.Gen.int
+import hedgehog.Gen.long
+import hedgehog.Gen.boolean
+import hedgehog.Gen
+import hedgehog.Range
+import hedgehog.core.GenT
 
 import scala.math.BigInt
 

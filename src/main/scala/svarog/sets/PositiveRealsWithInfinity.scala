@@ -1,15 +1,16 @@
-package svarog.data
+package svarog.sets
 
 import svarog.metric.ExtendedMetricSpace
 import svarog.preorders.SymmetricMonoidalClosedPreorder
 import svarog.preorders.SymmetricMonoidalClosedPreorder.MonoidalClosed
 
+// TODO use MathSet to model [0,oo] [0,oo) etc
 object PositiveRealsWithInfinity {
   sealed trait `[0,oo]`
   case object Inf extends `[0,oo]`
   case class R(v: BigDecimal) extends `[0,oo]`
     // TODO refinement types ensure >= 0
-    // TODO fix numerical overflow
+    // TODO fix numerical overflow use sth from Spire ?
 
     val ZEROBD: BigDecimal = BigDecimal(0)
     val ZERO: `[0,oo]` = R(ZEROBD)
@@ -50,8 +51,9 @@ object PositiveRealsWithInfinity {
 
   implicit val SMCP: MonoidalClosed[`[0,oo]`] =
     SymmetricMonoidalClosedPreorder[`[0,oo]`](LE _, ZERO, PLUS _, MONUS _)
-  val SMCP2: MonoidalClosed[`[0,oo]`] =
+  val Cost: MonoidalClosed[`[0,oo]`] =
     SymmetricMonoidalClosedPreorder[`[0,oo]`](GE _, ZERO, TIMES _, MONUS _)
+  val `([0, ∞], ≥, 0, +)` = Cost
 
   def EMS: ExtendedMetricSpace[`[0,oo]`] =
     (a: `[0,oo]`, b: `[0,oo]`) => (a, b) match {

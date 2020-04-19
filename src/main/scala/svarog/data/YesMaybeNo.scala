@@ -4,14 +4,14 @@ import svarog.preorders.SymmetricMonoidalPreorder
 import svarog.sets.PowerSet
 
 object YesMaybeNo {
-  sealed trait YMN
-  case object Yes extends YMN
-  case object Maybe extends YMN
-  case object No extends YMN
+  sealed trait NMY
+  case object Yes extends NMY
+  case object Maybe extends NMY
+  case object No extends NMY
 
-  val SMP: SymmetricMonoidalPreorder[YMN] = new SymmetricMonoidalPreorder[YMN] {
-    override def I: YMN = No
-    override def multiply(a: YMN, b: YMN): YMN = (a,b) match {
+  val `(NMY, ≤, yes, min)`: SymmetricMonoidalPreorder[NMY] = new SymmetricMonoidalPreorder[NMY] {
+    override def I: NMY = No
+    override def multiply(a: NMY, b: NMY): NMY = (a,b) match {
       case (a, b) if a == b => a
       case (No, _) => No
       case (Maybe, No) => No
@@ -26,7 +26,7 @@ object YesMaybeNo {
      *  Maybe | N  M     Y
      *  Yes   | N  M     Y
      */
-    override def le(a: YMN, b: YMN): Boolean = (a,b) match {
+    override def le(a: NMY, b: NMY): Boolean = (a,b) match {
       case (a, b) if a == b => true
       case (No, _) => true
       case (Maybe, No) => false
@@ -35,7 +35,7 @@ object YesMaybeNo {
     }
   }
 
-  val powerSet: PowerSet[YMN] = new PowerSet[YMN](
+  val powerSet: PowerSet[NMY] = new PowerSet[NMY](
     Set(
       Set(Yes), Set(Maybe), Set(No),
       Set(Yes, Maybe), Set(Yes, No), Set(Maybe, No),

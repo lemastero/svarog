@@ -1,8 +1,8 @@
-package svarog.monotone
+package svarog.functions
 
 import svarog.algebra.Monoid
+import svarog.algebra.Monoid.ops._
 import svarog.preorders.MonoidalPreorder
-import Monoid.ops._
 
 trait StrictMonoidalMonotone[P,Q]
   extends Function1[P,Q]

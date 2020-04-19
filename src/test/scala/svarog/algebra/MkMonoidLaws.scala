@@ -1,4 +1,4 @@
-package svarog.monoid
+package svarog.algebra
 
 import hedgehog.{Property, Result}
 import hedgehog.core.GenT

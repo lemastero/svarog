@@ -1,5 +1,6 @@
 package svarog.functions
 
+import svarog.monotone.MonoidalMonotoneNaive
 import svarog.preorders.MonoidalPreorder
 
 trait OplaxMonoidalMonotone[P,Q] extends Function1[P,Q]

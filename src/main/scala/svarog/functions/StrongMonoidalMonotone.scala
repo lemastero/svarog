@@ -1,7 +1,8 @@
 package svarog.functions
 
-import svarog.equivalence.Equivalence.ops._
-import svarog.equivalence.Equivalence
+import svarog.Equivalence
+import svarog.Equivalence.ops._
+import svarog.monotone.MonoidalMonotoneNaive
 import svarog.preorders.MonoidalPreorder
 
 trait StrongMonoidalMonotone[P,Q]

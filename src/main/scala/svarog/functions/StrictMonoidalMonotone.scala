@@ -2,6 +2,7 @@ package svarog.functions
 
 import svarog.algebra.Monoid
 import svarog.algebra.Monoid.ops._
+import svarog.monotone.MonoidalMonotoneNaive
 import svarog.preorders.MonoidalPreorder
 
 trait StrictMonoidalMonotone[P,Q]

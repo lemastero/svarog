@@ -1,24 +1,33 @@
 package svarog.metric
 
-trait MetricSpace[X] {
+import simulacrum.{op, typeclass}
+import svarog.{EquationalLaws, Equivalence}
+
+@typeclass
+trait MetricSpace[X]
+  extends Equivalence[X] {
+
+  @op("|-|")
   def distance(a: X, b: X): BigDecimal // TODO ensure >= 0
+
+  val zero = BigDecimal(0)
+  override def equivalent(a: X, b: X): Boolean =
+    distance(a,b) == zero
 }
 
 trait MetricSpaceLaws {
-  val zero = BigDecimal(0)
 
   def noDistanceFromPointToItself[X](x: X)(implicit ms: MetricSpace[X]): Boolean =
-   ms.distance(x,x) == zero
+    EquationalLaws.reflexivity(x,ms.equivalent)
 
   def symmetry[X](x: X, y: X)(implicit ms: MetricSpace[X]): Boolean =
-    ms.distance(x,y) == ms.distance(y,x)
+    EquationalLaws.symmetry(x,y, ms.distance)
 
   def equalWhenNoDistance[X](x: X, y: X)(implicit ms: MetricSpace[X]): Boolean =
-    if( ms.distance(x,y) == zero ) x == y
-    else true
+    EquationalLaws.skeletality(x,y,ms.equivalent)
 
-  def trianglInequality[X](x: X, y: X, z: X)(implicit ms: MetricSpace[X]): Boolean =
-    ms.distance(x,y) + ms.distance(y,z) >= ms.distance(x,z)
+  def triangleInequality[X](x: X, y: X, z: X)(implicit ms: MetricSpace[X]): Boolean =
+    EquationalLaws.triangleInequality[X,BigDecimal](x,y,z,ms.distance, _ <= _, _ + _)
 }
 
 

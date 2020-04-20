@@ -1,16 +1,15 @@
 package svarog.preorders
 
-import svarog.Equivalence.ops._
+import svarog.EquationalLaws
 
 /**
  * Poset (partial order, skeletal preorders) is preorder (X, ≤) where skeletality holds.
- * - skeletality: forall p, q ∈ P we have q ≤ p whenever p ≤ q
+ * - skeletality: forall x, y ∈ P we have x ~ y whenever x = y
  */
 trait Poset[P] extends Preorder[P]
 
 trait PosetLaws extends PreorderLaws {
 
   def skeletality[X](a: X, b: X)(implicit P: Preorder[X]): Boolean =
-    if(a ~ b) a == b
-    else true
+    EquationalLaws.skeletality(a,b,P.equivalent)
 }

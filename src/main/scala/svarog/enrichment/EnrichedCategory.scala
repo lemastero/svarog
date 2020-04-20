@@ -1,27 +1,29 @@
 package svarog.enrichment
 
-import svarog.preorders.{Preorder, MonoidalPreorder}
+import svarog.EquationalLaws
+import svarog.preorders.{MonoidalPreorder, Preorder}
 import svarog.sets.MathSet
 
 trait EnrichedCategory[V, X] { self =>
   def base: MonoidalPreorder[V]
   def objects: MathSet[X] = Function.const(true)
   def homObject(x: X, y: X): V
+
+  def Stanislaw(a: X, b: X): Boolean =
+    base.le(base.I, homObject(a,b))
 }
 
 trait EnrichedCategoryLaws {
   import svarog.preorders.MonoidalPreorder.ops._
 
   /** forall x ∈ Ob(X), I ≤ X(x,x) */
-  def ecLaw1[V,X](x: X)(implicit ec: EnrichedCategory[V,X]): Boolean = {
-    implicit val b = ec.base
-    import ec._
-    if(objects(x)) base.I <= homObject(x,x)
+  def reflexivity[V,X](x: X)(implicit ec: EnrichedCategory[V,X]): Boolean =
+    if(ec.objects(x)) EquationalLaws.reflexivity(x,ec.Stanislaw)
     else true
-  }
 
   /** forall x,y,z ∈ Ob(X), X(x,y) ⊗ X(y,z) ≤ X(x,z) */
-  def ecLaw2[V,X](ec: EnrichedCategory[V,X], x: X, y: X, z: X): Boolean = {
+  def triangleInequality[V,X](ec: EnrichedCategory[V,X], x: X, y: X, z: X): Boolean = {
+    // TODO looks like triangleInequality but the equality is wrong :(
     implicit val b = ec.base
     import ec._
     if( objects(x) && objects(y) && objects(z) ) {

@@ -1,35 +1,36 @@
 package svarog.enrichment
 
-import svarog.enrichment.BoolCategory.BoolCategory
+import svarog.EquationalLaws
+import svarog.enrichment.BoolCategory.BoolCat
 import svarog.preorders.{Preorder, SymmetricMonoidalPreorder}
-import svarog.preorders.SymmetricMonoidalPreorder.SMPBoolAndLe
+import svarog.preorders.SymmetricMonoidalPreorder.`(B, ≤, true, ∧)`
 
 // There is a one-to-one correspondence between preorders and Bool-categories
 object BoolCategory {
 
-  type BoolCategory[X] = EnrichedCategory[Boolean, X]
+  type BoolCat[X] = EnrichedCategory[Boolean, X]
 
-  def apply[X](pre: Preorder[X]): BoolCategory[X] = new BoolCategory[X] {
-    override def base: SymmetricMonoidalPreorder[Boolean] = SMPBoolAndLe
+  def apply[X](pre: Preorder[X]): BoolCat[X] = new BoolCat[X] {
+    override def base: SymmetricMonoidalPreorder[Boolean] = `(B, ≤, true, ∧)`
     override def homObject(x: X, y: X): Boolean = pre.le(x, y)
   }
 
-  implicit def asPreorder[X](implicit bc: BoolCategory[X]): Preorder[X] =
+  implicit def asPreorder[X](bc: BoolCat[X]): Preorder[X] =
     (a: X, b: X) => bc.homObject(a,b)
 }
 
 trait BoolCategoryLaws {
   import BoolCategory.asPreorder
 
-  def property1[X](bc: BoolCategory[X]): Boolean = {
-    val p = asPreorder(bc)
-    val bc2 = BoolCategory(p)
-    bc == bc2 // TODO we need equivalence for BoolCategory[X]
+  def toPreorderAndBackToBoolCategoryIsNoOp[X](bc: BoolCat[X])(a: X, b: X): Boolean = {
+    EquationalLaws.isAdjoint[BoolCat[X],Preorder[X]](bc,asPreorder,BoolCategory.apply) { case (b1, b2) =>
+      b1.homObject(a, b) == b2.homObject(a, b)
+    }
   }
 
-  def property2[X](p: Preorder[X]): Boolean = {
-    val bc = BoolCategory(p)
-    val p2 = asPreorder(bc)
-    p2 == p // TODO we need equivalence for BoolCategory[X]
+  def toBoolCatAndBackToPreorderIsNoOp[X](p: Preorder[X],a: X, b:X): Boolean = {
+    EquationalLaws.isAdjoint[Preorder[X],BoolCat[X]](p,BoolCategory.apply,asPreorder) { case (b1, b2) =>
+      b1.le(a, b) == b2.le(a, b)
+    }
   }
 }

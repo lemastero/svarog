@@ -1,23 +1,23 @@
 package svarog.preorders
 
 import simulacrum.{op, typeclass}
+import svarog.EquationalLaws
 import svarog.preorders.SymmetricMonoidalClosedPreorder.MonoidalClosed
 
 @typeclass
-trait SymmetricMonoidalClosedPreorder[X] extends SymmetricMonoidalPreorder[X] {
+trait SymmetricMonoidalClosedPreorder[X]
+  extends SymmetricMonoidalPreorder[X] {
+
   @op("-*")
   def homElement(a: X, b: X): X
 }
 
-trait SymmetricMonoidalClosedPreorderLaws extends SymmetricMonoidalPreorderLaws {
-  import svarog.preorders.SymmetricMonoidalClosedPreorder.ops._
+trait SymmetricMonoidalClosedPreorderLaws
+  extends SymmetricMonoidalPreorderLaws {
 
   /** forall a,v,w ∈ X, (a⊗v) ≤ w iff a ≤ (v -* 􏰈w) */
-  def lawSMCP[X](a: X, v: X, w: X)(implicit P: MonoidalClosed[X]): Boolean = {
-    if( P.multiply(a,v) <= w ) a <= (v -* w)
-    else if( a <= (v -* w) ) P.multiply(a, v) <= w
-    else true
-  }
+  def minusPlusPreorder[X](a: X, v: X, w: X)(implicit P: MonoidalClosed[X]): Boolean =
+    EquationalLaws.minusPlusPreorder(a,v,w,P.multiply,P.homElement,P.le)
 }
 
 object SymmetricMonoidalClosedPreorder {

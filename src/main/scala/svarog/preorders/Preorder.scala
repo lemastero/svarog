@@ -1,7 +1,7 @@
 package svarog.preorders
 
 import simulacrum.{op, typeclass}
-import svarog.Equivalence
+import svarog.{EquationalLaws, Equivalence}
 
 /**
  * Preorder is a (X, ≤) set X equipped with binary relation ≤
@@ -13,11 +13,20 @@ trait Preorder[X] extends Equivalence[X] { self =>
 
   // x and y are equivalent if y ≤ x and x ≤ y
   override def equivalent(a: X, b: X): Boolean = le(a,b) && le(b,a)
+}
 
-  // Product preorder
-  def product[Y](q: Preorder[Y]): Preorder[(X,Y)] = new Preorder[(X, Y)] {
-    override def le(a: (X,Y), b: (X,Y)): Boolean = self.le(a._1, b._1) && q.le(a._2, b._2)
-  }
+object Preorder {
+  def apply[X](lessOrEqual: (X, X) => Boolean): Preorder[X] =
+    (a: X, b: X) => lessOrEqual(a, b)
+
+  val `(R, <=)`: Preorder[Double] =
+    (a: Double, b: Double) => a <= b
+
+  val `(B, <=)`: Preorder[Boolean] =
+    (a: Boolean, b: Boolean) => a <= b
+
+  def discretePreorder[X]: Preorder[X] =
+    (a: X, b: X) => a == b
 }
 
 /**
@@ -28,12 +37,11 @@ trait Preorder[X] extends Equivalence[X] { self =>
 trait PreorderLaws {
   /** forall a ∈ X, a ≤ a */
   def reflexivity[X](a: X)(implicit P: Preorder[X]): Boolean =
-    P.le(a,a)
+    EquationalLaws.reflexivity[X](a, P.le)
 
   /** forall a,b,c ∈ X if a ≤ b and b ≤ c then a ≤ c */
   def transitivity[X](a: X, b: X, c: X)(implicit P: Preorder[X]): Boolean =
-    if(P.le(a,b) && P.le(b,c)) P.le(a,c)
-    else true
+    EquationalLaws.transitivity(a,b,c,P.le)
 }
 
 object PreorderLaws extends PreorderLaws

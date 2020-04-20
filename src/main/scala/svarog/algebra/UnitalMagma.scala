@@ -1,6 +1,7 @@
 package svarog.algebra
 
 import simulacrum.typeclass
+import svarog.EquationalLaws
 
 @typeclass
 trait UnitalMagma[X]
@@ -12,11 +13,8 @@ trait UnitalMagma[X]
 trait UnitalMagmaLaws {
 
   /** forall a ∈ X, I ⊗ a􏰆 = a and a ⊗ I = 􏰆a */
-  def unitality[X](a: X)(implicit P: UnitalMagma[X]): Boolean = {
-    import UnitalMagma.ops._
-    import P.I
-    ((I * a) == a) && (a == (a * I))
-  }
+  def unitality[X](a: X)(implicit P: UnitalMagma[X]): Boolean =
+    EquationalLaws.unitality(a, P.multiply, P.I)
 }
 
 object UnitalMagmaLaws extends UnitalMagmaLaws {}

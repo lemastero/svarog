@@ -20,6 +20,7 @@ object EquationalLaws {
     else true
 
   // a * b == b * a
+  // if( a ~ b ) => b ~ a
   def symmetry[X,Y](a: X, b: X, binOp: (X,X) => Y): Boolean =
     binOp(a,b) == binOp(b,a)
 

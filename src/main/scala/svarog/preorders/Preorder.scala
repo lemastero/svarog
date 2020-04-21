@@ -9,6 +9,10 @@ import svarog.{EquationalLaws, Equivalence}
  */
 @typeclass
 trait Preorder[X] extends Equivalence[X] { self =>
+  // TODO explore designining Preorders with explicit set
+  // this allows to express thing based on subsets - Meet, Join, Powerset, GaloisConnection
+  // def set: MathSet[X]
+
   @op("<=") def le(a: X, b: X): Boolean
 
   // x and y are equivalent if y ≤ x and x ≤ y

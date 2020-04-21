@@ -3,7 +3,7 @@ package svarog.preorders
 import hedgehog._
 import hedgehog.core.GenT
 import hedgehog.runner.Test
-import svarog.monoid.MkMonoidLaws.mkMonoidalLaws
+import svarog.algebra.MkMonoidLaws.mkMonoidalLaws
 import svarog.preorders.MkPreorderLaws.mkPreorderLaws
 
 object MkMonoidalPreorderLaws {

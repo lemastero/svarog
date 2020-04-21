@@ -1,18 +1,23 @@
-package svarog.monotone
+package svarog.functions
 
-import svarog.monoid.Monoid
+import svarog.algebra.Monoid
+import svarog.algebra.Monoid.ops._
+import svarog.monotone.MonoidalMonotoneNaive
 import svarog.preorders.MonoidalPreorder
-import Monoid.ops._
 
-trait StrictMonoidalMonotone[P,Q] extends Function1[P,Q]
+trait StrictMonoidalMonotone[P,Q]
+  extends Function1[P,Q]
 
 trait StrictMonoidalMonotoneLaws {
-  def lawA[P,Q](p: MonoidalPreorder[P], q: MonoidalPreorder[Q], f: MonoidalMonotone[P,Q]): Boolean =
+  def lawA[P,Q](
+      p: MonoidalPreorder[P],
+      q: MonoidalPreorder[Q],
+      f: MonoidalMonotoneNaive[P,Q]): Boolean =
     q.I == f(p.I)
 
   def lawB[P,Q](
-       f: MonoidalMonotone[P,Q],
-       p1: P, p2: P)(implicit
+                 f: MonoidalMonotoneNaive[P,Q],
+                 p1: P, p2: P)(implicit
        p: MonoidalPreorder[P],
        q: MonoidalPreorder[Q]): Boolean = {
     val qm = f(p1) * f(p2)
@@ -29,8 +34,8 @@ trait StrictMonoidMonotoneLaws {
     q.I == f(p.I)
 
   def lawB[P,Q](
-      f: MonoidalMonotone[P,Q],
-      p1: P, p2: P)(implicit
+                 f: MonoidalMonotoneNaive[P,Q],
+                 p1: P, p2: P)(implicit
       p: MonoidalPreorder[P],
       q: MonoidalPreorder[Q]): Boolean = {
     val qm = f(p1) * f(p2)

@@ -1,30 +1,32 @@
 package svarog.enrichment
 
-import svarog.preorders.{Preorder, SymmetricMonoidalPreorder}
+import svarog.EquationalLaws
+import svarog.preorders.{MonoidalPreorder, Preorder}
+import svarog.sets.MathSet
 
-trait EnrichedCategory[V, X] {
-  def base: SymmetricMonoidalPreorder[V]
-  def isObject(x: X): Boolean
+trait EnrichedCategory[V, X] { self =>
+  def base: MonoidalPreorder[V]
+  def objects: MathSet[X] = Function.const(true)
   def homObject(x: X, y: X): V
+
+  def Stanislaw(a: X, b: X): Boolean =
+    base.le(base.I, homObject(a,b))
 }
 
 trait EnrichedCategoryLaws {
-  import svarog.preorders.Preorder.ops._
-  import svarog.monoid.Monoid.ops._
+  import svarog.preorders.MonoidalPreorder.ops._
 
   /** forall x ∈ Ob(X), I ≤ X(x,x) */
-  def ecLaw1[V,X](x: X)(implicit ec: EnrichedCategory[V,X]): Boolean = {
-    implicit val b = ec.base
-    import ec._
-    if(isObject(x)) base.I <= homObject(x,x)
+  def reflexivity[V,X](x: X)(implicit ec: EnrichedCategory[V,X]): Boolean =
+    if(ec.objects(x)) EquationalLaws.reflexivity(x,ec.Stanislaw)
     else true
-  }
 
   /** forall x,y,z ∈ Ob(X), X(x,y) ⊗ X(y,z) ≤ X(x,z) */
-  def ecLaw2[V,X](ec: EnrichedCategory[V,X], x: X, y: X, z: X): Boolean = {
+  def triangleInequality[V,X](ec: EnrichedCategory[V,X], x: X, y: X, z: X): Boolean = {
+    // TODO looks like triangleInequality but the equality is wrong :(
     implicit val b = ec.base
     import ec._
-    if( isObject(x) && isObject(y) && isObject(z) ) {
+    if( objects(x) && objects(y) && objects(z) ) {
       val xy = homObject(x,y)
       val yz = homObject(y,z)
       val xz = homObject(x,z)
@@ -42,12 +44,12 @@ object EnrichedCategory {
   }
 
   def boolCategoryFrom[X](pre: Preorder[X]): BoolCategory[X] = new BoolCategory[X] {
-    override def base: SymmetricMonoidalPreorder[Boolean] = new SymmetricMonoidalPreorder[Boolean] {
+    override def base: MonoidalPreorder[Boolean] = new MonoidalPreorder[Boolean] {
       override def I: Boolean = true
       override def multiply(a: Boolean, b: Boolean): Boolean = a || b
       override def le(a: Boolean, b: Boolean): Boolean = a <= b
     }
-    override def isObject(x: X): Boolean = true
+    override def objects: MathSet[X] = Function.const(true)
     override def homObject(x: X, y: X): Boolean = pre.le(x,y)
   }
 }

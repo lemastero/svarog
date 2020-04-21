@@ -1,6 +1,8 @@
 package svarog.preorders
 
-import svarog.monoid.{Monoid, MonoidLaws}
+import simulacrum.typeclass
+import svarog.EquationalLaws
+import svarog.algebra.{Monoid, MonoidLaws}
 
 /**
  * Preorder with monoidal structure is a preorder (X, ≤) equipped with:
@@ -11,7 +13,19 @@ import svarog.monoid.{Monoid, MonoidLaws}
  * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
  * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c)
  */
-trait MonoidalPreorder[X] extends Preorder[X] with Monoid[X]
+@typeclass
+trait MonoidalPreorder[X]
+  extends Preorder[X]
+  with Monoid[X]
+
+object MonoidalPreorder {
+
+  val `(N, <=, 1, |)`: MonoidalPreorder[Int] = new MonoidalPreorder[Int] { // TODO BigInt
+    override def I: Int = 1
+    override def multiply(a: Int, b: Int): Int = a * b
+    override def le(a: Int, b: Int): Boolean = a % b == 0
+  }
+}
 
 /**
  * Laws for MonoidalPreorder:
@@ -20,13 +34,10 @@ trait MonoidalPreorder[X] extends Preorder[X] with Monoid[X]
  * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c)
  */
 trait MonoidalPreorderLaws extends PreorderLaws with MonoidLaws {
-  import svarog.preorders.Preorder.ops._
-  import svarog.monoid.Monoid.ops._
 
   /** forall a1, a2, b1, b2 ∈ X, if a1 ≤ b1 and a2 ≤ b2, then a1 ⊗ a2 ≤ b1 ⊗ b2 */
   def monotonicity[X](a1: X, a2: X, b1: X, b2: X)(implicit P: MonoidalPreorder[X]): Boolean =
-    if( (a1 <= b1) && (a2 <= b2) ) (a1 * a2) <= (b1 * b2)
-    else true
+    EquationalLaws.monotonicity(a1,a2,b1,b2, P.multiply, P.le)
 }
 
-object MonoidalPreorderLaws extends MonoidalPreorderLaws
+object MonoidalPreorderLaws extends MonoidalPreorderLaws {}

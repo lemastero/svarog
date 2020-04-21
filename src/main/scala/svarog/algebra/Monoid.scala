@@ -14,15 +14,6 @@ object Monoid {
   }
 }
 
-object MonoidInstances {
-  val `(R, +, 0)` = Monoid[Double](0.0)(_ + _)
-  val `(N, +, 0)` = Monoid[Int](0)(_ + _)
-  val `(R, *, 1)` = Monoid[Double](1.0)(_ * _)
-  val `(N, *, 1)` = Monoid[Int](1)(_ * _)
-  val `(B, AND, true)` = Monoid[Boolean](true)(_ && _)
-  val `(B, OR, false)` = Monoid[Boolean](false)(_ || _)
-}
-
 trait MonoidLaws
   extends SemigroupLaws
   with UnitalMagmaLaws

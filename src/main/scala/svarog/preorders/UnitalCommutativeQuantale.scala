@@ -1,6 +1,6 @@
 package svarog.preorders
 
-import svarog.meetjoin.JoinSemilattice
+import svarog.semilattice.JoinSemilattice
 
 trait UnitalCommutativeQuantale[X]
   extends JoinSemilattice[X]

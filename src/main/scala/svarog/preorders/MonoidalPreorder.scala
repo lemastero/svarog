@@ -3,7 +3,6 @@ package svarog.preorders
 import simulacrum.typeclass
 import svarog.EquationalLaws
 import svarog.algebra.{Monoid, MonoidLaws}
-import svarog.enrichment.CostCategory
 
 /**
  * Preorder with monoidal structure is a preorder (X, ≤) equipped with:

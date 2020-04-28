@@ -1,7 +1,7 @@
 package svarog.enrichment
 
-import svarog.preorders.MonoidalPreorder
-import svarog.preorders.Preorder.ops._
+import svarog.order_theory.MonoidalPreorder
+import svarog.order_theory.Preorder.ops._
 
 trait EnrichedFunctor[X,Y,V] {
   def map(

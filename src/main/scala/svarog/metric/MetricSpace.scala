@@ -1,7 +1,8 @@
 package svarog.metric
 
 import simulacrum.{op, typeclass}
-import svarog.{EquationalLaws, Equivalence}
+import svarog.equivalence.Equivalence
+import svarog.universal_algebra.EquationalLaws
 
 @typeclass
 trait MetricSpace[X]

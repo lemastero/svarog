@@ -1,9 +1,9 @@
-package svarog.preorders
+package svarog.order_theory
 
 import hedgehog.{Property, Result}
 import hedgehog.core.GenT
 import hedgehog.runner.Test
-import svarog.preorders.MkMonoidalPreorderLaws.mkMonoidalPreorderLaws
+import svarog.order_theory.MkMonoidalPreorderLaws.mkMonoidalPreorderLaws
 
 object MkSymmetricMonoidalPreorderLaws {
 

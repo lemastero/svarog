@@ -1,7 +1,7 @@
-package svarog.sets
+package svarog.set_theory
 
-import svarog.preorders.Preorder
-import svarog.preorders.Preorder.ops._
+import svarog.order_theory.Preorder
+import svarog.order_theory.Preorder.ops._
 
 abstract class UpperSet[X] extends MathSet[X] {
   def pre: Preorder[X]

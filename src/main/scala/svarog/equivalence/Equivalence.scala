@@ -1,6 +1,7 @@
-package svarog
+package svarog.equivalence
 
 import simulacrum.{op, typeclass}
+import svarog.universal_algebra.EquationalLaws
 
 /**
  * Equivalence relation ~ is a binary operation that is:

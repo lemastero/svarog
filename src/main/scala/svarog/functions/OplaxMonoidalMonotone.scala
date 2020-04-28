@@ -1,13 +1,13 @@
 package svarog.functions
 
 import svarog.monotone.MonoidalMonotoneNaive
-import svarog.preorders.MonoidalPreorder
+import svarog.order_theory.MonoidalPreorder
 
 trait OplaxMonoidalMonotone[P,Q] extends Function1[P,Q]
 
 trait OplaxMonoidalMonotoneLaws {
   import svarog.algebra.Monoid.ops._
-  import svarog.preorders.Preorder.ops._
+  import svarog.order_theory.Preorder.ops._
 
   def lawA[P,Q](implicit p: MonoidalPreorder[P], q: MonoidalPreorder[Q], f: MonoidalMonotoneNaive[P,Q]): Boolean =
     f(p.I) <= q.I

@@ -1,8 +1,7 @@
 package svarog.equivalence
 
-import svarog.Equivalence
-import svarog.sets.MathSet
-import svarog.Equivalence.ops._
+import svarog.set_theory.MathSet
+import Equivalence.ops._
 
 trait EquivalenceConnected[X]
   extends MathSet[X]

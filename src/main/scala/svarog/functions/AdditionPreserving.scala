@@ -1,7 +1,7 @@
 package svarog.functions
 
-import svarog.EquationalLaws
 import svarog.algebra.Magma
+import svarog.universal_algebra.EquationalLaws
 
 trait AdditionPreserving[X]
   extends Function1[X,X]

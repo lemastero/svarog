@@ -1,8 +1,8 @@
-package svarog.sets
+package svarog.set_theory
 
 import svarog.metric.ExtendedMetricSpace
-import svarog.preorders.SymmetricMonoidalClosedPreorder
-import svarog.preorders.SymmetricMonoidalClosedPreorder.MonoidalClosed
+import svarog.order_theory.SymmetricMonoidalClosedPreorder
+import svarog.order_theory.SymmetricMonoidalClosedPreorder.MonoidalClosed
 
 // TODO use MathSet to model [0,oo] [0,oo) etc
 object PositiveRealsWithInfinity {

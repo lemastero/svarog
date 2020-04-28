@@ -1,9 +1,9 @@
 package svarog.enrichment
 
-import svarog.EquationalLaws
 import svarog.enrichment.BoolCategory.BoolCat
-import svarog.preorders.{Preorder, SymmetricMonoidalPreorder}
-import svarog.preorders.SymmetricMonoidalPreorder.`(B, ≤, true, ∧)`
+import svarog.order_theory.{Preorder, SymmetricMonoidalPreorder}
+import svarog.order_theory.SymmetricMonoidalPreorder.`(B, ≤, true, ∧)`
+import svarog.universal_algebra.EquationalLaws
 
 // There is a one-to-one correspondence between preorders and Bool-categories
 object BoolCategory {

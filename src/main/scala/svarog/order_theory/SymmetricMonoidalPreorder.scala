@@ -1,4 +1,4 @@
-package svarog.preorders
+package svarog.order_theory
 
 import simulacrum.typeclass
 import svarog.algebra.{SymmetricMonoid, SymmetricMonoidLaws}

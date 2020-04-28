@@ -1,11 +1,11 @@
 package svarog.monotone
 
-import svarog.preorders.Preorder
+import svarog.order_theory.Preorder
 
 trait Monotone[P,Q] extends Function1[P,Q]
 
 trait MonotoneLaws {
-  import svarog.preorders.Preorder.ops._
+  import svarog.order_theory.Preorder.ops._
 
   /** forall a,b ∈ X if a ≤ b then f(a) ≤ f(b) */
   def monotoneLaw[P,Q](

@@ -3,7 +3,7 @@ package svarog.functions
 import svarog.algebra.Monoid
 import svarog.algebra.Monoid.ops._
 import svarog.monotone.MonoidalMonotoneNaive
-import svarog.preorders.MonoidalPreorder
+import svarog.order_theory.MonoidalPreorder
 
 trait StrictMonoidalMonotone[P,Q]
   extends Function1[P,Q]

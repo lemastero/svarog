@@ -1,7 +1,7 @@
 package svarog.enrichment
 
-import svarog.preorders.MonoidalPreorder
-import svarog.sets.MathSet
+import svarog.order_theory.MonoidalPreorder
+import svarog.set_theory.MathSet
 
 case class EnrichedProduct[V,X,Y](
   x: EnrichedCategory[V,X],

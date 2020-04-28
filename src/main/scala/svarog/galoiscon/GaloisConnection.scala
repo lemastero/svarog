@@ -1,7 +1,7 @@
 package svarog.galoiscon
 
 import svarog.monotone.Monotone
-import svarog.preorders.Preorder
+import svarog.order_theory.Preorder
 
 // TODO how to define left adjoint ?
 // TODO how to define right adjoint ?
@@ -13,7 +13,7 @@ case class GaloisConnection[P,Q](
 )
 
 trait GaloisConnectionLaw {
-  import svarog.preorders.Preorder.ops._
+  import svarog.order_theory.Preorder.ops._
 
   /** forall p ∈ P, q ∈ Q, f(p) ≤ q iff p ≤ g(q) */
   def transitivity[P,Q](p: P, q: Q, gc: GaloisConnection[P,Q]): Boolean = {

@@ -1,9 +1,9 @@
 package svarog.enrichment
 
 import svarog.metric.LawvereMetricSpace
-import svarog.sets.PositiveRealsWithInfinity.`[0,oo]`
-import svarog.preorders.SymmetricMonoidalPreorder
-import svarog.sets.PositiveRealsWithInfinity
+import svarog.set_theory.PositiveRealsWithInfinity.`[0,oo]`
+import svarog.order_theory.SymmetricMonoidalPreorder
+import svarog.set_theory.PositiveRealsWithInfinity
 
 object CostCategory {
   type CostCategory[X] = EnrichedCategory[`[0,oo]`, X]

@@ -1,8 +1,8 @@
-package svarog.preorders
+package svarog.order_theory
 
 import simulacrum.{op, typeclass}
-import svarog.EquationalLaws
-import svarog.preorders.SymmetricMonoidalClosedPreorder.MonoidalClosed
+import svarog.order_theory.SymmetricMonoidalClosedPreorder.MonoidalClosed
+import svarog.universal_algebra.EquationalLaws
 
 @typeclass
 trait SymmetricMonoidalClosedPreorder[X]

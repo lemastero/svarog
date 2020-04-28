@@ -1,6 +1,7 @@
 package svarog.enrichment
 
-import svarog.{EquationalLaws, Equivalence}
+import svarog.equivalence.Equivalence
+import svarog.universal_algebra.EquationalLaws
 
 trait SkeletalEnrichedCategory[V,X]
   extends EnrichedCategory[V,X]

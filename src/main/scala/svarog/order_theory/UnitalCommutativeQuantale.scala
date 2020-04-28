@@ -1,4 +1,4 @@
-package svarog.preorders
+package svarog.order_theory
 
 import svarog.semilattice.JoinSemilattice
 

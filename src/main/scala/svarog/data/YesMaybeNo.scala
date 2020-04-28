@@ -1,7 +1,7 @@
 package svarog.data
 
-import svarog.preorders.SymmetricMonoidalPreorder
-import svarog.sets.PowerSet
+import svarog.order_theory.SymmetricMonoidalPreorder
+import svarog.set_theory.PowerSet
 
 object YesMaybeNo {
   sealed trait NMY

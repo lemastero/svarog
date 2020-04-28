@@ -1,7 +1,7 @@
 package svarog.monotone
 
-import svarog.preorders.MonoidalPreorder
-import svarog.preorders.MonoidalPreorder.ops._
+import svarog.order_theory.MonoidalPreorder
+import svarog.order_theory.MonoidalPreorder.ops._
 
 /** lax monoidal monotones */
 trait MonoidalMonotoneNaive[P,Q]

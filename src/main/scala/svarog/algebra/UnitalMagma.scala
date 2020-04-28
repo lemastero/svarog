@@ -1,7 +1,7 @@
 package svarog.algebra
 
 import simulacrum.typeclass
-import svarog.EquationalLaws
+import svarog.universal_algebra.EquationalLaws
 
 @typeclass
 trait UnitalMagma[X]

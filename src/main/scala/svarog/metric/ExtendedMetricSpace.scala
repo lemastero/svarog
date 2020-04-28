@@ -1,8 +1,8 @@
 package svarog.metric
 
 import simulacrum.typeclass
-import svarog.EquationalLaws
-import svarog.sets.PositiveRealsWithInfinity.ZERO
+import svarog.set_theory.PositiveRealsWithInfinity.ZERO
+import svarog.universal_algebra.EquationalLaws
 
 @typeclass
 trait ExtendedMetricSpace[X]

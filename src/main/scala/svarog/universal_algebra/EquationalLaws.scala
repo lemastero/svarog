@@ -1,4 +1,4 @@
-package svarog
+package svarog.universal_algebra
 
 object EquationalLaws {
 

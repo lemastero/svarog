@@ -1,7 +1,8 @@
-package svarog.preorders
+package svarog.order_theory
 
 import simulacrum.{op, typeclass}
-import svarog.{EquationalLaws, Equivalence}
+import svarog.equivalence.Equivalence
+import svarog.universal_algebra.EquationalLaws
 
 /**
  * Preorder is a (X, ≤) set X equipped with binary relation ≤

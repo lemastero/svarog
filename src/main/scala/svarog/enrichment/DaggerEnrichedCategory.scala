@@ -1,6 +1,6 @@
 package svarog.enrichment
 
-import svarog.EquationalLaws
+import svarog.universal_algebra.EquationalLaws
 
 trait DaggerEnrichedCategory[V,X]
   extends EnrichedCategory[V,X]

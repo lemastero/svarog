@@ -1,6 +1,6 @@
 package svarog.semilattice
 
-import svarog.preorders.{Preorder, PreorderLaws}
+import svarog.order_theory.{Preorder, PreorderLaws}
 
 // TODO this definition is special form where we take single element subsets
 // assume all joins exists

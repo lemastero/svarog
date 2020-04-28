@@ -1,4 +1,4 @@
-package svarog.preorders
+package svarog.order_theory
 
 case class ProductPreorder[X,Y](
  p: Preorder[X],

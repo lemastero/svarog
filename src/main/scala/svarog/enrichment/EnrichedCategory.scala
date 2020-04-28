@@ -1,8 +1,8 @@
 package svarog.enrichment
 
-import svarog.EquationalLaws
-import svarog.preorders.{MonoidalPreorder, Preorder}
-import svarog.sets.MathSet
+import svarog.order_theory.{MonoidalPreorder, Preorder}
+import svarog.set_theory.MathSet
+import svarog.universal_algebra.EquationalLaws
 
 trait EnrichedCategory[V, X] { self =>
   def base: MonoidalPreorder[V]
@@ -14,7 +14,7 @@ trait EnrichedCategory[V, X] { self =>
 }
 
 trait EnrichedCategoryLaws {
-  import svarog.preorders.MonoidalPreorder.ops._
+  import svarog.order_theory.MonoidalPreorder.ops._
 
   /** forall x ∈ Ob(X), I ≤ X(x,x) */
   def reflexivity[V,X](x: X)(implicit ec: EnrichedCategory[V,X]): Boolean =

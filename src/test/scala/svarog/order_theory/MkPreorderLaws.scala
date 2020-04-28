@@ -1,4 +1,4 @@
-package svarog.preorders
+package svarog.order_theory
 
 import hedgehog.{Property, Result}
 import hedgehog.core.GenT

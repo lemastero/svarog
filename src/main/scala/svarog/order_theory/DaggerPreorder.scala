@@ -1,6 +1,6 @@
-package svarog.preorders
+package svarog.order_theory
 
-import svarog.EquationalLaws
+import svarog.universal_algebra.EquationalLaws
 
 
 /**

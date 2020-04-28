@@ -1,9 +1,9 @@
-package svarog.preorders
+package svarog.order_theory
 
 import hedgehog.runner.{Prop, Properties}
 import svarog.generators.SimpleGen.mkBooleanGen
 import svarog.generators.SimpleGen.mkGenBigInt
-import svarog.preorders.MkSymmetricMonoidalPreorderLaws.mkSymmetricMonoidalPreorderLaws
+import svarog.order_theory.MkSymmetricMonoidalPreorderLaws.mkSymmetricMonoidalPreorderLaws
 
 class SymmetricMonoidalPreorderTests extends Properties {
 

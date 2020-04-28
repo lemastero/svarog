@@ -1,8 +1,8 @@
 package svarog.monotone
 
-import svarog.EquationalLaws
-import svarog.preorders.MonoidalPreorder
-import svarog.preorders.MonoidalPreorder.ops._
+import svarog.order_theory.MonoidalPreorder
+import svarog.order_theory.MonoidalPreorder.ops._
+import svarog.universal_algebra.EquationalLaws
 
 /**
  * Let (P,<=p,Ip,*p) and (Q,<=q,Iq,*q) be a monoidal preorders.

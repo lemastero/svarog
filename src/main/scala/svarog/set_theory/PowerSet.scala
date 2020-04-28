@@ -1,4 +1,4 @@
-package svarog.sets
+package svarog.set_theory
 
 class PowerSet[X](all: Set[Set[X]]) extends MathSet[Set[X]] {
   override def apply(x: Set[X]): Boolean =

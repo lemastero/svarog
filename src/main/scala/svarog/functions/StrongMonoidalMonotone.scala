@@ -1,9 +1,9 @@
 package svarog.functions
 
-import svarog.Equivalence
-import svarog.Equivalence.ops._
+import svarog.equivalence.Equivalence.ops._
+import svarog.equivalence.Equivalence
 import svarog.monotone.MonoidalMonotoneNaive
-import svarog.preorders.MonoidalPreorder
+import svarog.order_theory.MonoidalPreorder
 
 trait StrongMonoidalMonotone[P,Q]
   extends Function1[P,Q]

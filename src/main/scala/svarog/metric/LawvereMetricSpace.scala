@@ -1,9 +1,9 @@
 package svarog.metric
 
 import simulacrum.{op, typeclass}
-import svarog.EquationalLaws
-import svarog.sets.PositiveRealsWithInfinity.{ZERO, `[0,oo]`}
-import svarog.sets.PositiveRealsWithInfinity.`([0, ∞], ≥, 0, +)`
+import svarog.set_theory.PositiveRealsWithInfinity.{ZERO, `[0,oo]`}
+import svarog.set_theory.PositiveRealsWithInfinity.`([0, ∞], ≥, 0, +)`
+import svarog.universal_algebra.EquationalLaws
 
 @typeclass
 trait LawvereMetricSpace[X]{

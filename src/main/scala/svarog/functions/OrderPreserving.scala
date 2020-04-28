@@ -1,7 +1,7 @@
 package svarog.functions
 
-import svarog.preorders.Preorder
-import svarog.preorders.Preorder.ops._
+import svarog.order_theory.Preorder
+import svarog.order_theory.Preorder.ops._
 
 trait OrderPreserving[X]
   extends Function1[X,X]

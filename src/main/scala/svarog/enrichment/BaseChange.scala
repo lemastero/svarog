@@ -1,8 +1,8 @@
 package svarog.enrichment
 
 import svarog.monotone.MonoidalMonotone
-import svarog.preorders.MonoidalPreorder
-import svarog.sets.MathSet
+import svarog.order_theory.MonoidalPreorder
+import svarog.set_theory.MathSet
 
 class BaseChange {
 

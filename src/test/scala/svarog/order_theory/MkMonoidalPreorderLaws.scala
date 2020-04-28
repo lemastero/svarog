@@ -1,10 +1,10 @@
-package svarog.preorders
+package svarog.order_theory
 
 import hedgehog._
 import hedgehog.core.GenT
 import hedgehog.runner.Test
 import svarog.algebra.MkMonoidLaws.mkMonoidalLaws
-import svarog.preorders.MkPreorderLaws.mkPreorderLaws
+import svarog.order_theory.MkPreorderLaws.mkPreorderLaws
 
 object MkMonoidalPreorderLaws {
 

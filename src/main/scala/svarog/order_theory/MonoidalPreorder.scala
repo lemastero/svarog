@@ -1,8 +1,8 @@
-package svarog.preorders
+package svarog.order_theory
 
 import simulacrum.typeclass
-import svarog.EquationalLaws
 import svarog.algebra.{Monoid, MonoidLaws}
+import svarog.universal_algebra.EquationalLaws
 
 /**
  * Preorder with monoidal structure is a preorder (X, ≤) equipped with:

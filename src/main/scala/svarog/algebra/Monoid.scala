@@ -14,6 +14,11 @@ object Monoid {
   }
 }
 
+/**
+ * Laws for Monoid:
+ * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c)
+ * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
+ */
 trait MonoidLaws
   extends SemigroupLaws
   with UnitalMagmaLaws

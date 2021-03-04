@@ -30,8 +30,12 @@ object MonoidalPreorder {
 /**
  * Laws for MonoidalPreorder:
  * - monotonicity: forall a1, a2, b1, b2 ∈ X, if a1 ≤ b1 and a2 ≤ b2, then a1 ⊗ a2 ≤ b1 ⊗ b2
- * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
+ *
+ * - reflexivity: forall a ∈ X, a ≤ a
+ * - transitivity: forall a,b,c ∈ X if a ≤ b and b ≤ c then a ≤ c
+ *
  * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c)
+ * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
  */
 trait MonoidalPreorderLaws extends PreorderLaws with MonoidLaws {
 

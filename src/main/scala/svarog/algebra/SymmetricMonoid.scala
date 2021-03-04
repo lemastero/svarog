@@ -8,7 +8,9 @@ trait SymmetricMonoid[X]
   extends Monoid[X]
 
 /**
- * Laws for SymmetricMonoidalPreorder:
+ * Laws for SymmetricMonoid:
+ * - associativity: forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c)
+ * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
  * - symmetry: forall a,b ∈ X, a ⊗ b = b ⊗ a
  */
 trait SymmetricMonoidLaws

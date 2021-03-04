@@ -10,9 +10,13 @@ trait UnitalMagma[X]
   def I: X
 }
 
+/**
+ * Laws for UnitalMagma:
+ * - unitality: forall a ∈ X, I ⊗ a = a and a ⊗ I = a
+ */
 trait UnitalMagmaLaws {
 
-  /** forall a ∈ X, I ⊗ a􏰆 = a and a ⊗ I = 􏰆a */
+  /** forall a ∈ X, I ⊗ a = a and a ⊗ I = a */
   def unitality[X](a: X)(implicit P: UnitalMagma[X]): Boolean =
     EquationalLaws.unitality(a, P.multiply, P.I)
 }

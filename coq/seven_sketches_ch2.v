@@ -1,3 +1,5 @@
+Require Import Coq.Arith.Le.
+
 (*
 Preorder (X, <=) is a set X equipped with binary relation <= on X such that:
 a) reflexivity: x <= x
@@ -28,7 +30,10 @@ Qed.
 
 Theorem nat_le_reflexivity: forall n : nat,
  n <= n.
-Admitted.
+Proof.
+  intros n.
+  apply le_n.
+Qed.
 
 Theorem nat_le_transitivity: forall n m k : nat,
  n <= m ->
@@ -160,13 +165,18 @@ Qed.
 Theorem nat_mult_1_left_unitality: forall n : nat,
  1 * n  = n.
 Proof.
- intros n.
- simpl.
-Admitted.
+  intros n. induction n as [| n' IHn'].
+    - reflexivity.
+    - simpl. rewrite <- nat_plus_0_right_unitality. simpl. reflexivity. 
+Qed.
 
 Theorem nat_mult_1_right_unitality: forall n : nat,
  n * 1 = n.
-Admitted.
+Proof.
+  intros n. induction n as [| n' IHn'].
+    - reflexivity.
+    - simpl. rewrite -> IHn'. simpl. reflexivity. 
+Qed.
 
 (*
 Symmetric Monoid (X, *, I) is set X equipped with:
@@ -212,7 +222,10 @@ Qed.
 
 Theorem nat_plus_symmetry: forall a b : nat,
  a + b = b + a.
-Admitted.
+Proof.
+  intros a. intros b. induction a as [| a' IHa'].
+  - rewrite <- plus_n_O. simpl. reflexivity.
+  - simpl. rewrite <- plus_n_Sm. rewrite <- IHa'. reflexivity. Qed.
 
 (*
 Preorder with monoidal structure (X, <=, ⊗, I) is a preorder (X, <=) equipped with:

@@ -1,4 +1,5 @@
 Require Import Coq.Arith.Le.
+Require Import Coq.Bool.Bool.
 
 (*
 Preorder (X, <=) is a set X equipped with binary relation <= on X such that:
@@ -41,8 +42,8 @@ Theorem nat_le_transitivity: forall n m k : nat,
  n <= k.
 Admitted.
 
-
 (* (Nat, >=) is preorder *)
+
 
 Theorem nat_ge_reflexivity: forall n : nat,
  n >= n.
@@ -81,16 +82,45 @@ Proof.
   - simpl. reflexivity.
 Qed.
 
+(* (Bool, xor) is semigroup *)
+
+Theorem bool_xor_associativity: forall a b c : bool,
+ (xorb (xorb a b) c) = (xorb a (xorb b c)).
+Proof.
+  intros.
+  destruct a.
+  - destruct b.
+    + destruct c.
+      ++ simpl. reflexivity.
+      ++ simpl. reflexivity.
+    + destruct c.
+      ++ simpl. reflexivity.
+      ++ simpl. reflexivity.
+  - destruct b.
+    + destruct c.
+      ++ simpl. reflexivity.
+      ++ simpl. reflexivity.
+    + destruct c.
+      ++ simpl. reflexivity.
+      ++ simpl. reflexivity.
+Qed.
+
 (* (Nat, +) is a semigroup *)
 
 Theorem nat_plus_associativity: forall a b c : nat,
  (a + b) + c = a + (b + c).
-Admitted.
+Proof.
+intros a b c.
+induction a as [| a H1].
+- simpl. reflexivity.
+- simpl. rewrite H1. reflexivity.
+Qed.
 
 (* (Nat, * ) is a semigroup *)
 
 Theorem nat_mult_associativity: forall a b c : nat,
  (a * b) * c = a * (b * c).
+Proof.
 Admitted.
 
 (*
@@ -138,6 +168,48 @@ Proof.
  destruct b.
  - simpl. reflexivity.
  - simpl. reflexivity.
+Qed.
+
+(* (Bool, xor, false) is a monoid *)
+
+Theorem bool_xor_false_left_unitality: forall b : bool,
+ (xorb b false) = b.
+Proof.
+  intro b.
+  destruct b.
+ - simpl. reflexivity.
+ - simpl. reflexivity.
+Qed.
+
+Theorem bool_xor_right_unitality: forall b : bool,
+ (xorb false b) = b.
+Proof.
+  intro b.
+  destruct b.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+Qed.
+
+(* (Bool, <=>, true) is a monoid *)
+
+Check eqb.
+
+Theorem bool_eqb_true_left_unitality: forall b : bool,
+ (eqb b true) = b.
+Proof.
+  intro b.
+  destruct b.
+ - simpl. reflexivity.
+ - simpl. reflexivity.
+Qed.
+
+Theorem bool_eqb_right_unitality: forall b : bool,
+ (eqb true b) = b.
+Proof.
+  intro b.
+  destruct b.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
 Qed.
 
 (* (Nat, +, 0) is a monoid *)
@@ -190,7 +262,7 @@ such that:
 
 (* (Bool, and, true) is a symmetric monoidal *)
 
-Theorem bool_and_true_symmetry: forall a b : bool,
+Theorem bool_and_symmetry: forall a b : bool,
  andb a b = andb b a.
 Proof.
  intros a b.
@@ -205,7 +277,7 @@ Qed.
 
 (* (Bool, or, false) is a symmetric monoidal *)
 
-Theorem bool_or_false_symmetry: forall a b : bool,
+Theorem bool_or_symmetry: forall a b : bool,
  orb a b = orb b a.
 Proof.
  intros a b.
@@ -217,6 +289,38 @@ Proof.
    + reflexivity.
    + reflexivity.
 Qed.
+
+(* (Bool, xor, false) is a symmetric monoidal *)
+
+Theorem bool_xor_symmetry: forall a b : bool,
+ xorb a b = xorb b a.
+Proof.
+ intros a b.
+ destruct b.
+ - destruct a.
+   + reflexivity.
+   + reflexivity.
+- destruct a.
+   + reflexivity.
+   + reflexivity.
+Qed.
+
+
+(* (Bool, <=>, true) is a symmetric monoidal *)
+
+Theorem bool_eqb_symmetry: forall a b : bool,
+ eqb a b = eqb b a.
+Proof.
+ intros a b.
+ destruct b.
+ - destruct a.
+   + reflexivity.
+   + reflexivity.
+- destruct a.
+   + reflexivity.
+   + reflexivity.
+Qed.
+
 
 (* (Nat, +, 0) is a symmetric monoidal *)
 
@@ -254,5 +358,5 @@ Theorem exercise_2_10_1_on_nat : forall t u v w x y z : nat,
  t + u <= y + z.
 Proof.
  intros t u v w x y z H_t_vw H_wu_xz H_ux_y.
- Admitted.
+Admitted.
 

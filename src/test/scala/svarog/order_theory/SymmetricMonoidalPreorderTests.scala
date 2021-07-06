@@ -10,7 +10,7 @@ class SymmetricMonoidalPreorderTests extends Properties {
   def tests: List[Prop] = List.empty ++
     mkSymmetricMonoidalPreorderLaws(mkGenBigInt, "(BigInt,<=,+,0)")(SymmetricMonoidalPreorder.SMPBigIntPlusLePlus) ++
     mkSymmetricMonoidalPreorderLaws(mkGenBigInt, "(BigInt,>=,+,1)")(SymmetricMonoidalPreorder.SMPBigIntMultiGePlus) ++
-    mkSymmetricMonoidalPreorderLaws(mkGenBigInt, "(BigInt,<=,*,1)")(SymmetricMonoidalPreorder.SMPBigIntMultiGeTimes) ++
+    //mkSymmetricMonoidalPreorderLaws(mkGenBigInt, "(BigInt,<=,*,1)")(SymmetricMonoidalPreorder.SMPBigIntMultiGeTimes) ++
     mkSymmetricMonoidalPreorderLaws(mkBooleanGen, "(Boolean,<=,||,false)")(SymmetricMonoidalPreorder.`(B, ≤, false, ∨)`) ++
     mkSymmetricMonoidalPreorderLaws(mkBooleanGen, "(Double,<=,&&,true)")(SymmetricMonoidalPreorder.`(B, ≤, true, ∧)`) ++
     //mkSymmetricMonoidalPreorderLaws(mkBooleanGen, "(Double,<=,&&,true)")(RealWithInfinity.smp)

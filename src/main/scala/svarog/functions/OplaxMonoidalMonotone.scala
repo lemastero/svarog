@@ -3,7 +3,16 @@ package svarog.functions
 import svarog.monotone.MonoidalMonotoneNaive
 import svarog.order_theory.MonoidalPreorder
 
-trait OplaxMonoidalMonotone[P,Q] extends Function1[P,Q]
+/**
+ * Let (P, <=p, Ip, *p) and (Q, <=q, Iq, *q) be a monoidal preorders.
+ * A (lax) monoidal monotone from (P, <=p, Ip, *p) to (Q, <=q, Iq, *q) is a monotone map:
+ * f: (P, <=p) -> (Q, <=q) satisfying:
+ * a) Iq <=q f(Ip)
+ * b) f(p1) *q f(p2) <=q f(p *p p2)
+ */
+trait OplaxMonoidalMonotone[P,Q] extends Function1[P,Q] {
+  def map(x: MonoidalPreorder[P]): MonoidalPreorder[Q]
+}
 
 trait OplaxMonoidalMonotoneLaws {
   import svarog.algebra.Monoid.ops._

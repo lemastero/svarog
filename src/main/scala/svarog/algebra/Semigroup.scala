@@ -8,7 +8,7 @@ trait Semigroup[X] extends Magma[X]
 
 trait SemigroupLaws {
 
-  /** forall a,b,c ∈ X, (a ⊗ b) ⊗ c􏰆 = a ⊗ (b ⊗ c) */
+  /** forall a,b,c ∈ X, (a ⊗ b) ⊗ c = a ⊗ (b ⊗ c) */
   def associativity[X](a: X, b: X, c: X)(implicit P: Semigroup[X]): Boolean =
     EquationalLaws.associativity(a,b,c, P.multiply)
 }
